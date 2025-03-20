@@ -3,22 +3,67 @@ name: Build and Test
 on:
   push:
     branches:
-        - codespace-humble-rotary-phone-69975ggv667vhrvv
-    #   - feature/**
+      - codespace-humble-rotary-phone-69975ggv667vhrvv
+      - develop
+      - feature/**
+  pull_request:
+    branches:
+      - main
+      - codespace-humble-rotary-phone-69975ggv667vhrvv
 
 jobs:
   build:
     runs-on: self-hosted
+
     steps:
-      - uses: actions/checkout@v4
-        # Optionally, checkout a specific branch if needed (though 'on: push' usually handles this)
-        # with:
-        #   ref: ${{ github.ref_name }}
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # --- Example for a Python project ---
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.x'
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-      - name: Run tests
-        run: python manage.py test
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Python tests
+        run: |
+          # Replace 'your_test_command' with the actual command to run your tests
+          # For example: pytest
+          python -m unittest discover -s tests -p "*.py"
+        # You might want to add a step to run linters or formatters:
+        # - name: Run linters
+        #   run: |
+        #     pip install flake8
+        #     flake8 .
+
+      # --- Example for a Node.js project (Uncomment if your project uses Node.js) ---
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 'lts/*'
+      # - name: Install Node.js dependencies
+      #   run: npm install
+      #   # Or use yarn: yarn install
+
+      # - name: Run Node.js tests
+      #   run: npm test
+      #   # Or use yarn: yarn test
+
+      # --- Generic Build Steps (Adapt as needed) ---
+      - name: Optional: Build application
+        run: |
+          # Add your build commands here if your project requires a build step
+          # For example: make build, npm run build, etc.
+          echo "No explicit build step defined in this example."
+
+      # --- Example for uploading artifacts (Optional) ---
+      # - name: Upload artifacts
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: build-output
+      #     path: your/output/path # Replace with the actual path to your build output
+

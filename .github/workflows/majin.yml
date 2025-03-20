@@ -2,7 +2,7 @@ name: Build and Test
 
 on:
   push:
-    branches-ignore:
+    branches:
       - main # Ignore pushes to the main branch
     # Optionally, target specific branches if needed:
     # branches:

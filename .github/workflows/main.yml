@@ -54,11 +54,11 @@ jobs:
       #   # Or use yarn: yarn test
 
       # --- Generic Build Steps (Adapt as needed) ---
-      - name: Optional: Build application
-        run: |
+      # name: Optional: Build application
+        #run: |
           # Add your build commands here if your project requires a build step
           # For example: make build, npm run build, etc.
-          echo "No explicit build step defined in this example."
+         # echo "No explicit build step defined in this example."
 
       # --- Example for uploading artifacts (Optional) ---
       # - name: Upload artifacts
